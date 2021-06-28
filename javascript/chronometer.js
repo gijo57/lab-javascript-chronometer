@@ -21,6 +21,8 @@ class Chronometer {
     return this.currentTime - this.getMinutes() * 60;
   }
 
+  getMilliseconds() {}
+
   computeTwoDigitNumber(value) {
     return value.toString().padStart(2, '0');
   }
