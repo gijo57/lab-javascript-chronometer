@@ -20,12 +20,11 @@ function printTime() {
 
 function printMinutes() {
   let minutes = chronometer.getMinutes();
-  console.log(minutes, minutes % 10);
 
   if (minutes && minutes % 10 === 0) {
     minUniElement.innerText = 0;
     minDecElement.innerText = Number(minDecElement.innerText) + 1;
-  } else {
+  } else if (minutes > Number(minUniElement.innerText)) {
     minUniElement.innerText = Number(minUniElement.innerText) + 1;
   }
 }
@@ -52,7 +51,10 @@ function printMilliseconds() {
 }
 
 function printSplit() {
-  // ... your code goes here
+  const split = chronometer.split();
+  const splitElement = document.createElement('li');
+  splitElement.innerText = split;
+  splitsElement.appendChild(splitElement);
 }
 
 function clearSplits() {
@@ -99,8 +101,8 @@ btnRightElement.addEventListener('click', () => {
     minUniElement.innerText = 0;
     secDecElement.innerText = 0;
     secUniElement.innerText = 0;
+    splitsElement.innerHTML = '';
   }
-  btnRightElement.innerText === 'RESET'
-    ? chronometer.reset()
-    : chronometer.split();
+
+  btnRightElement.innerText === 'RESET' ? chronometer.reset() : printSplit();
 });
