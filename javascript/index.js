@@ -20,35 +20,30 @@ function printTime() {
 }
 
 function printMinutes() {
-  let minutes = chronometer.getMinutes();
+  let minutes = chronometer.computeTwoDigitNumber(chronometer.getMinutes());
 
-  if (minutes && minutes % 10 === 0) {
-    minUniElement.innerText = 0;
-    minDecElement.innerText = Number(minDecElement.innerText) + 1;
-  } else if (minutes > Number(minUniElement.innerText)) {
-    minUniElement.innerText = Number(minUniElement.innerText) + 1;
-  }
+  minDecElement.innerText = minutes[0] || 0;
+  minUniElement.innerText = minutes[1] || 0;
 }
 
 function printSeconds() {
-  let seconds = chronometer.getSeconds();
+  let seconds = chronometer.computeTwoDigitNumber(chronometer.getSeconds());
 
   if (secUniElement.innerText === '9' && secDecElement.innerText === '5') {
     secUniElement.innerText = 0;
     secDecElement.innerText = -1;
   }
 
-  if (seconds % 10 === 0) {
-    secUniElement.innerText = 0;
-    secDecElement.innerText = Number(secDecElement.innerText) + 1;
-  } else {
-    secUniElement.innerText = Number(secUniElement.innerText) + 1;
-  }
+  secDecElement.innerText = seconds[0] || 0;
+  secUniElement.innerText = seconds[1] || 0;
 }
 
 // ==> BONUS
 function printMilliseconds() {
-  console.log(chronometer.getMilliseconds());
+  let milliseconds = chronometer.getMilliseconds().toString().slice(0, 2);
+
+  milDecElement.innerText = milliseconds[0] || 0;
+  milUniElement.innerText = milliseconds[1] || 0;
 }
 
 function printSplit() {
@@ -102,6 +97,8 @@ btnRightElement.addEventListener('click', () => {
     minUniElement.innerText = 0;
     secDecElement.innerText = 0;
     secUniElement.innerText = 0;
+    milDecElement.innerText = 0;
+    milUniElement.innerText = 0;
     splitsElement.innerHTML = '';
   }
 
